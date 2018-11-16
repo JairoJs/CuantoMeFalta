@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="squares">35dp</dimen>
+    <dimen name="square_text">18sp</dimen>
+    <dimen name="shareview_dimen">190dp</dimen>
+    <dimen name="calc_grade">80sp</dimen>
+    <dimen name="goal_grade_dimen">50dp</dimen>
+    <dimen name="goalgrade_text">28dp</dimen>
+    <dimen name="first_text_size">20sp</dimen>
+    <dimen name="second_text_size">18sp</dimen>
+</resources>

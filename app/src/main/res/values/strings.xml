@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">CuantoMeFalta</string>
+    <string name="cero_percent">0%</string>
+    <string name="one">1</string>
+    <string name="one_point_cero">1.0</string>
+    <string name="me_faltan">Me faltan</string>
+    <string name="para_llegar">Para el</string>
+    <string name="five">5</string>
+    <string name="rate_text">Hola, hemos notado que has usado la herramienta algunas veces. Si te ha gustado, ayúdanos dando tu opinión y calificación en Play Store. Y si te ha encantado, apoyanos compartiendola con tus amigos</string>
+    <string name="calificar">Calificar</string>
+    <string name="noGracias">No, gracias</string>
+    <string name="rateUs">Calificanos</string>
+    <string name="luego">Luego</string>
+
+    <string name="next">Siguiente</string>
+    <string name="skip">Saltar</string>
+    <string name="start">Iniciar</string>
+
+</resources>

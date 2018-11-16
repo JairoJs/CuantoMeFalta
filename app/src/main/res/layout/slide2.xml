@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context="com.cuantomefalta.cuantomefalta.MainActivity">
+
+    <EditText
+        android:id="@+id/weighing3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/cero_percent"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weighing2"
+        tools:text="25%"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"/>
+
+    <EditText
+        android:id="@+id/grade3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/one"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toRightOf="@+id/weighing3"
+        app:layout_constraintRight_toLeftOf="@+id/converted3"
+        app:layout_constraintTop_toTopOf="@+id/weighing3"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/converted3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/one_point_cero"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/weighing3"
+        tools:text="8.5"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <EditText
+        android:id="@+id/weighing2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/cero_percent"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weighing1"
+        android:text="35%"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"/>
+
+    <EditText
+        android:id="@+id/grade2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/one"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@+id/weighing2"
+        app:layout_constraintRight_toLeftOf="@+id/converted2"
+        app:layout_constraintTop_toTopOf="@+id/weighing2"
+        android:text="42"/>
+
+    <TextView
+        android:id="@+id/converted2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="4.2"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/weighing2"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <EditText
+        android:id="@+id/weighing1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/cero_percent"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weighing"
+        android:text="30%"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"/>
+
+    <EditText
+        android:id="@+id/grade1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/one"
+        android:text="54"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@+id/weighing1"
+        app:layout_constraintRight_toLeftOf="@+id/converted1"
+        app:layout_constraintTop_toTopOf="@+id/weighing1"
+        android:layout_marginTop="0dp"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <TextView
+        android:id="@+id/converted1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/little_square"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/weighing1"
+        android:text="5.3"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <EditText
+        android:id="@+id/weighing"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/cero_percent"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="35%"
+
+        />
+
+    <EditText
+        android:id="@+id/grade"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/little_square"
+        android:cursorVisible="false"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:hint="@string/one"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@+id/weighing"
+        app:layout_constraintRight_toLeftOf="@+id/converted"
+        app:layout_constraintTop_toTopOf="@+id/weighing"
+        android:text="61"/>
+
+    <TextView
+        android:id="@+id/converted"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/little_square"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/weighing"
+        android:text="5.9"/>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-2505831397151341/8310107897"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/shareView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/big_circle"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <TextSwitcher
+            android:id="@+id/final_grade"
+            android:layout_width="0dp"
+            android:layout_height="234dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="-12dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="125sp"
+                android:text="5.12"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="-12dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="125sp"
+                tools:text="99" />
+        </TextSwitcher>
+
+        <EditText
+            android:id="@+id/goalGrade"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/little_circle"
+            android:cursorVisible="false"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:visibility="gone"
+            android:text="6"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/first_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Nota definitiva"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shareView"
+            android:layout_marginTop="24dp"
+            />
+
+        <TextView
+            android:id="@+id/second_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/para_llegar"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/goalGrade"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/floatingActionButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="false"
+        android:background="@drawable/circle_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shareView"
+        app:srcCompat="@drawable/ic_add_white_16dp"
+        android:elevation="7dp"/>
+
+    <ImageButton
+        android:elevation="7dp"
+        android:background="@drawable/circle_button"
+        android:id="@+id/floatingActionButton9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="false"
+        app:layout_constraintLeft_toLeftOf="@+id/floatingActionButton8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton8"
+        app:srcCompat="@drawable/ic_clear_white_16dp" />
+
+    <ImageButton
+        android:elevation="7dp"
+        android:background="@drawable/circle_button"
+        android:id="@+id/floatingActionButton10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="false"
+        app:layout_constraintLeft_toLeftOf="@+id/floatingActionButton9"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton9"
+        app:srcCompat="@drawable/ic_delete_sweep_white_16dp" />
+
+    <ImageButton
+        android:id="@+id/floatingActionButton11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle_button"
+        android:clickable="false"
+        android:elevation="7dp"
+        app:layout_constraintBottom_toBottomOf="@id/shareView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/floatingActionButton10"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton10"
+        app:srcCompat="@drawable/ic_play_arrow_white_16dp" />
+
+    <ImageButton
+        android:elevation="7dp"
+        android:background="@drawable/circle_button"
+        android:id="@+id/floatingActionButton12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="0dp"
+        android:clickable="false"
+        app:layout_constraintRight_toRightOf="@id/shareView"
+        app:layout_constraintBottom_toBottomOf="@+id/shareView"
+        app:srcCompat="@drawable/ic_share_white_16dp"
+        android:layout_marginBottom="56dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/bg_screen1"
+        android:alpha="0.8"
+        android:elevation="8dp"></LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/intro_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:elevation="10dp"
+        android:fontFamily="sans-serif"
+        android:padding="2dp"
+        android:text="También podras calcular\nla nota definitiva de\nuna materia ingresando las\ncalificaciones de todos los examenes"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grade1" />
+
+
+</android.support.constraint.ConstraintLayout>

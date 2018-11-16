@@ -1,0 +1,9 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <scale
+        android:duration="350"
+        android:fromXScale="50dp"
+        android:toXScale="50dp"
+        android:fromYScale="50dp"
+        android:toYScale="0dp"/>
+</set>

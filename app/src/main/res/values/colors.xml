@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0f62ac</color>
+    <color name="colorPrimaryDark">#00397c</color>
+    <color name="colorAccent">#0f62ac</color>
+
+    <!-- Color for the big circle -->
+    <color name="big_circle">#00397c</color>
+    <!-- Color for the little square -->
+    <color name="little_square">#00397c</color>
+
+    <!-- Screens background -->
+    <color name="bg_screen1">#00397c</color>
+    <color name="bg_screen2">#0f62ac</color>
+    <color name="bg_screen3">#00397c</color>
+
+    <!-- dots active colors -->
+    <color name="dot_active">#000000</color>
+
+
+    <!-- dots inactive colors -->
+    <color name="dot_inactive">#cccccc</color>
+</resources>
