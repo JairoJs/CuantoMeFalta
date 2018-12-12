@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+//Libreria externa para la implementacion del tutorial inicial
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
 import tourguide.tourguide.ToolTip;
@@ -46,6 +47,8 @@ import tourguide.tourguide.TourGuide;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Declaracion de todas las variables utilizadas, se evito el uso de arrays para
+    //asi darle mayor legibilidad al codigo acerca del proposito de cada variable
     int rows = 1;
     Context context;
     EditText weighing, weighing1, weighing2, weighing3, grade, grade1, grade2, grade3, goalGrade;
@@ -59,10 +62,15 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     private InterstitialAd mInterstitial;
 
-    private int RUNS_TO_SHOW_INTER_AD=6;
-    private int LAUNCHES_TO_SHOW_RATE_PROMPT=3;
+    //Constante para establecer el numero de veces que el usuario puede hacer un calculo de notas
+    // para que se le muestre un aviso intertitial
+    private int final RUNS_TO_SHOW_INTER_AD=6;
+    
+    //Constante para establecer el numero de veces que el usuario puede iniciar la aplicacion
+    // para que se le muestre un aviso de calificacion de la app
+    private int final LAUNCHES_TO_SHOW_RATE_PROMPT=3;
+    
     TourGuide mTutorialHandler;
-
     private Animation mEnterAnimation, mExitAnimation;
 
     SharedPreferences prefs = null;
@@ -79,22 +87,34 @@ public class MainActivity extends AppCompatActivity {
         prefs = getSharedPreferences(getPackageName(), MODE_PRIVATE);
         activity = this;
 
+        //Obtener la referencia de los campos de la interfaz
         getViewsReference();
 
+        //cargar las animaciones utilizadas
         loadAnimations();
 
+        //Metodo que se encarga de la solicitud y carga de los avisos del banner fijo
         setBannerAdStuff();
 
+        //Verificar si la aplicacion esta iniciando por primera vez
         checkFirstRun();
 
+        //Metodo para chequear el numero de veces que la aplicacion se ha iniciado.
         checkLaunchCount();
 
+        //Establecer los listener de los botones fab de la interfaz
         setFabsListeners();
 
+        //Establecer los listeners de los campos de ponderacion, ya que se da informacion inmediata al usuario indicanole si
+        //su entreda fue correcta o no
         setWeighingListener();
-
+        
+        //Establecer los listeners de los campos de notas, ya que se da informacion inmediata al usuario indicanole si
+        //su entreda fue correcta o no
         setGradeListeners();
 
+        //Establecer los listeners de los campos de notas deseadas, ya que se da informacion inmediata al usuario indicanole si
+        //su entreda fue correcta o no
         setGoalGradeListeners();
 
 
@@ -102,55 +122,80 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Verificar si la aplicacion esta iniciando por primera vez
     private void checkFirstRun()
     {
+        //Consulta en el archivo de preferencias si firstrun == true
         mIsFirstRun = prefs.getBoolean("firstrun", true);
         if (mIsFirstRun) {
 
+            //Cambiar el valor a falso
             prefs.edit().putBoolean("firstrun", false).commit();
+            
+           //Crea y establece RunBtnCount a cero, esta preferencia se usa para conocer el numero de veces que 
+           //el usuario realiza un calculo, ya que de el depende cuando se le mostrara el anuncio.
             prefs.edit().putInt("RunBtnCount", 0).commit();
+            
+            //Crea y establece LaunchCount a -1, esta preferencia se usa para conocer el numero de veces que 
+            //el usuario realiza inicia la app, ya que de el depende cuando se le pedira que califique la app.
             prefs.edit().putInt("LaunchCount",-1).commit();
+            
+            //Se envia a la actividad Splash activity, la cual es la encargada de mostrar el logo inicial de la aplicacion.
             Intent intent = new Intent(MainActivity.this, SplashActivity.class);
             startActivity(intent);
             this.finish();
         }
     }
-
+    //Metodo para chequear el numero de veces que la aplicacion se ha iniciado.
     private void checkLaunchCount()
     {
+        //Obtiene el valor de la preferencia LaunchCount y le suma una unidad.
         prefs.edit().putInt("LaunchCount", prefs.getInt("LaunchCount",0)+1).commit();
+        
+        //almacena el valor en una variable para efectos de decisiones.
         int  count =  prefs.getInt("LaunchCount",-1);
+        
+        //Si se ha cumplido el numero de inicios correspondientes
         if(count == LAUNCHES_TO_SHOW_RATE_PROMPT)
         {
+            //Se crea un cuadro de dialogo solicitando al usuario que califique la aplicacion
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
+            //El titulo del cuadro y el mensaje que contendra
             builder.setMessage(R.string.rate_text)
                     .setTitle(R.string.rateUs);
 
+            //Boton que dirige al usuario para que vaya a playstore a calificar
             builder.setPositiveButton(R.string.calificar, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" +getPackageName())));
                 }
             });
+            
+            //Boton para que el usuario decline la calificacion...si toca este boton no se le volvera a preguntar
             builder.setNegativeButton(R.string.noGracias, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.dismiss();
                 }
             });
 
+            //Boton para recordarle de la calificacion en otro momento
             builder.setNeutralButton(R.string.luego, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                    //como el usuario pidio mas tiempo para calificar, el contador de lanzamientos se re inicializa a cero
                     prefs.edit().putInt("LaunchCount",0).commit();
                     dialog.dismiss();
                 }
             });
 
+            //creacion y exhibicion del dialogo
             AlertDialog dialog = builder.create();
             dialog.show();
 
         }
     }
 
+    //Obtener las referencias de todos los campos de los cuales se extraera informacion.
     private void getViewsReference()
     {
         //getting reference to weighings Edittext fields
@@ -184,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Carga de todas las animaciones utilizadas en la aplicacion. (durante el proceso de carga y calculo de notas)
     private void loadAnimations()
     {
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -207,8 +253,10 @@ public class MainActivity extends AppCompatActivity {
         mExitAnimation.setFillAfter(true);
     }
 
+    //Listener de los botones flotantes
     private void setFabsListeners()
     {
+        //Este boton añade filas de notas a ingresar.
         mAddFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Este boton pone a default del numer de filas
         mResetFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -251,6 +300,7 @@ public class MainActivity extends AppCompatActivity {
                     rows--;
                 }
 
+                //Ocultamiento de filas extras
                 weighing.setText("");
                 grade.setText("");
                 converted.setText("1.0");
@@ -275,16 +325,17 @@ public class MainActivity extends AppCompatActivity {
                 if(goalGrade.getVisibility()==View.GONE) {
                     goalGrade.setVisibility(View.VISIBLE);
                     goalGrade.startAnimation(appear);
-
-
                 }
+                //Ocultamiento de filas extras
             }
         });
 
+        //Boton que borra toda la informacion ingresada e inicializa a valores default las filas activas
         mDeleteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //Setteo de todos los valores de las filas activas a sus valores default
                 finalGrade.setText("");
                 if(first_text.getVisibility()==View.VISIBLE)
                 {
@@ -318,6 +369,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Boton para compartir el resultado del calculo en las redes sociales.
         mShareFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -327,32 +379,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Boton para realizar el calculo de la nota
         mRunFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 boolean itDidCalculateSoCount = false;
+                //Verificar si todos los campos activos tiene valores validos
                 if (!areAllFieldsSet()) {
+                    //Verifica que la suma de las ponderaciones sea 100%
                     if (sumWeighings() == 100) {
 
+                        //Activa el boton de compartir el resultado
                         if(mShareFab.getVisibility()==View.GONE)
                         {
                             mShareFab.setVisibility(View.VISIBLE);
                             mShareFab.startAnimation(pop_in);
                         }
+                        //Metodo principal para el calculo de la nota definitiva
                         calculateDefinitiveGrade();
+                        
                         itDidCalculateSoCount = true;
 
                     } else {
+                        //Si la ponderaciones son superiores a 100 hay un error en los datos ingresados
                         if (sumWeighings() > 100) {
 
 
                             finalGrade.setText("");
+                            //oculta el boton de compartir en caso de que estuviera activ
                             if(mShareFab.getVisibility()==View.VISIBLE)
                             {
                                 mShareFab.setVisibility(View.GONE);
                                 mShareFab.startAnimation(pop_out);
                             }
+                            //Oculta y setea a default los valores que depennden de una correcta entrada de datos
                             if(goalGrade.getVisibility()==View.VISIBLE)
                             {
                                 first_text.setVisibility(View.GONE);
@@ -366,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
 
                         } else {
 
+                            //Si no son cuatro filas de notas, el usuario desea calcular cuanto le falta en el ultimo examen
                             if(rows!=4) {
                                 calculateHowManyPoints();
                                 itDidCalculateSoCount = true;
@@ -373,6 +435,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else
                             {
+                                //Validacion de otro error en las ponderaciones
                                 finalGrade.setText("");
                                 if(mShareFab.getVisibility()==View.VISIBLE)
                                 {
@@ -396,10 +459,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+                //si logro realizar el calculo
                 if(itDidCalculateSoCount)
                 {
+                    //Actualiza el archivo de preferencias para aumentar en 1 el numero de veces que el usuario a calculado satisfactoriamente
                     prefs.edit().putInt("RunBtnCount",prefs.getInt("RunBtnCount",0)+1).commit();
 
+                    //obtiene el valor de la preferencia luego de la actualizacion y verifica si alcanzo el limite para mostrar el anuncio 
+                    //interstitial
                     int count = prefs.getInt("RunBtnCount",0);
                     if(count >= RUNS_TO_SHOW_INTER_AD)
                     {
@@ -414,6 +481,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Listener para los ccampos de ponderacion
     private void setWeighingListener()
     {
         weighing.setOnClickListener(new View.OnClickListener() {
@@ -424,6 +492,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Validacion de cambio de foco
         weighing.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -439,6 +508,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //manejo de la entrada por teclado
         weighing.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -539,6 +609,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Listeners para los campos de Notas
     private void setGradeListeners()
     {
         grade.setOnClickListener(new View.OnClickListener() {
@@ -550,6 +621,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Validacion para cambio de foco
         grade.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -557,6 +629,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Listener del enter del editor de teclado
         grade.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
@@ -637,6 +710,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Listener del campo de nota deseada
     private void setGoalGradeListeners()
     {
         goalGrade.setOnClickListener(new View.OnClickListener() {
@@ -685,8 +759,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Manejo de procesos del anuncio Banner
     private void setBannerAdStuff()
     {
+        //Inicializacion con Id del publicador
         MobileAds.initialize(this, "ca-app-pub-2505831397151341~3934790750");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -708,6 +784,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Manejo de procesos del anuncio Interstitial
     private void setInterstitialAdStuff()
     {
         if(mInterstitial.isLoaded()) {
@@ -737,6 +814,7 @@ public class MainActivity extends AppCompatActivity {
             }).start();
         }
 
+        //Al mostrar el anuncion se re inicializa el contador
         else
         {
             prefs.edit().putInt("RunBtnCount",RUNS_TO_SHOW_INTER_AD-1).commit();
@@ -744,6 +822,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Validacion del valor ingresado
     public boolean validate(Editable text)
     {
         String info = text.toString().split("%")[0];
@@ -763,6 +842,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Validacion del valor ingresado ne el campo de nota
     public boolean validateGrade(Editable text)
     {
         String info = text.toString();
@@ -798,6 +878,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Metodo para hacer visible una fila
     public void makeVisible(EditText w, EditText g, TextView c)
     {
 
@@ -810,6 +891,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Metodo para ocultar una fila
     public void makeGone(EditText w, EditText g, TextView c)
     {
 
@@ -827,6 +909,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //SSuma de las ponderaciones
     public int sumWeighings()
     {
         int sum = 0;
@@ -850,6 +933,7 @@ public class MainActivity extends AppCompatActivity {
         return sum;
     }
 
+    //Verificacion de que todos los campos activos tengan datos ingresados
     public boolean areAllFieldsSet()
     {
         boolean flag = false;
@@ -926,6 +1010,7 @@ public class MainActivity extends AppCompatActivity {
         return flag;
     }
 
+    //Metodo para llamar la atencion del usuario para que termine de llenar el campo al cambiar de foco
     public void focusEvent(boolean hf, EditText g, TextView c)
     {
         if (!hf) {
@@ -940,6 +1025,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+     //Metodo para llamar la atencion del usuario para que termine de llenar el campo al abandonar el editor de texto
     public void editorEvent(int actionId, KeyEvent event, EditText g, TextView c)
     {
         if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -963,6 +1049,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Metodo para calcular cuantos puntos le hacen falta al usiario para pasar una materia
     public void calculateHowManyPoints()
     {
 
@@ -1065,6 +1152,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Redondeo de decimales
     public double round(double value, int places)
     {
         if (places < 0) throw new IllegalArgumentException();
@@ -1074,6 +1162,7 @@ public class MainActivity extends AppCompatActivity {
         return bd.doubleValue();
     }
 
+    //Metodo para validar el campo de nota deseada
     public boolean validateGoalGrade(EditText gg)
     {
         String info = gg.getText().toString();
@@ -1096,6 +1185,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Metodo para el calculo de la nota definitiva
     public void calculateDefinitiveGrade()
     {
 
@@ -1137,7 +1227,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+//Metodo para tomar una captura de pantalla de la nota requierida y compartirla en redes sociales
     public void takeScreenShot(View v)
     {
         v.setDrawingCacheEnabled(true);
@@ -1149,7 +1239,7 @@ public class MainActivity extends AppCompatActivity {
 
             File cachePath = new File(context.getCacheDir(), "images");
             cachePath.mkdirs(); // don't forget to make the directory
-            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
+            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // override this image every time
             b.compress(Bitmap.CompressFormat.PNG, 100, stream);
             stream.close();
 
